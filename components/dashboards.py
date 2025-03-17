@@ -42,12 +42,12 @@ layout = dbc.Col([
                 dbc.Col([
             dbc.CardGroup([
                 dbc.Card([
-                    html.Legend('Saldo'),
-                    html.H5('R$ 5000', id='p-saldo-dashboard', style={})
+                    html.Legend('Receita'),
+                    html.H5('R$ 1345', id='p-receita-dashboard', style={})
                 ], style={'padding-left':'20px', 'padding-top':'10px'}),
                 dbc.Card(
-                    html.Div(className='fa fa-university', style=card_icon),
-                    color='warning',
+                    html.Div(className='fa fa-smile-o', style=card_icon),
+                    color='success',
                     style={'maxWidth': 75, 'height': 100, 'margin-left': '-10px'}
                 )
             ])
@@ -57,19 +57,57 @@ layout = dbc.Col([
                 dbc.Col([
             dbc.CardGroup([
                 dbc.Card([
-                    html.Legend('Saldo'),
-                    html.H5('R$ 5000', id='p-saldo-dashboard', style={})
+                    html.Legend('Despesa'),
+                    html.H5('R$ -2000', id='p-despesa-dashboard', style={})
                 ], style={'padding-left':'20px', 'padding-top':'10px'}),
                 dbc.Card(
-                    html.Div(className='fa fa-university', style=card_icon),
-                    color='warning',
+                    html.Div(className='fa fa-meh-o', style=card_icon),
+                    color='danger',
                     style={'maxWidth': 75, 'height': 100, 'margin-left': '-10px'}
                 )
             ])
         ], width=4),
+    ], style={'margin': '10px'}),
+
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                html.Legend("Filtrar lançamentos", className="card-title"),
+                html.Label("Categorias das receitas"),
+                html.Div(
+                    dcc.Dropdown(
+                    id="dropdown-receita",
+                    clearable=False,
+                    style={"width": "100%"},
+                    persistence=True,
+                    persistence_type="session",
+                    multi=True)
+                ),
+
+                html.Label("Categorias das despesas", style={"margin-top":"10px"}),
+                dcc.Dropdown(
+                    id="dropdown-despesa",
+                    clearable=False,
+                    style={"width": "100%"},
+                    persistence=True,
+                    persistence_type="session",
+                    multi=True
+                ),
+
+                html.Legend("Período de Anpalise", style={"margin-top":"10px"}),
+                dcc.DatePickerRange(
+                    month_format='Do MMM, YY',
+                    end_date_placeholder_text='Data...',
+                    start_date=datetime.today(),
+                    end_date=datetime.today() + timedelta(days=31),
+                    with_portal=True,
+                    updatemode='singledate',
+                    id='date-picker-config',
+                    style={'z-index': '100'}),
+            ],style={'height':"100%", 'padding':'20px'})
+        ], width=4)
     ])
-       
-    ])
+])
 
 
 

@@ -23,7 +23,7 @@ app.layout = dbc.Container(children=[
             content
         ], md=10)
     ])
-
+ 
 ], fluid=True,)
 
 

@@ -109,12 +109,19 @@ layout = dbc.Col([
 
                                         
                                     ])
-                                ])
+                                ],title='Adicionar/Remover Categorias')
+                            ], flush=True, start_collapsed=True, id='accordion-receita'),
+
+                            html.Div(id='id_teste_receita', style={'padding-top':'20px'}),
+                            dbc.Modal([
+                                dbc.Button("Adicionar Receita", id="salvar_receita", color='success'),
+                                dbc.Popover(dbc.PopoverBody("Receita Salva"),target="salvar_receita", placement="left", trigger="click"),
                             ])
-                        ])
+                        ], style={'margin-top':'25px'})
 
                     ])
-                ], id='modal-novo-receita'),
+                ],style={"background-color":"rgba(17, 140, 79, 0.05)"},
+                id='modal-novo-receita',),
 
                 #Modal Despesa
                 dbc.Modal([

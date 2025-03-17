@@ -12,7 +12,25 @@ from app import app
 
 # =========  Layout  =========== #
 layout = dbc.Col([
-    html.H5('Extratos')
+    dbc.Row([
+        html.Legend("Tabela de Despesas"),
+        html.Div(id='tabela-despesas', className='dbc')
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(id='bar-graph', style={'margin-right':'20px'})
+        ], width=9),
+        
+        dbc.Col([
+            dbc.Card(
+                dbc.CardBody([
+                    html.H4("Despesas")
+                ])
+            )
+        ])
+    ])
+    
        
     ])
 

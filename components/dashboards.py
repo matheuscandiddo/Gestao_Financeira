@@ -20,7 +20,6 @@ card_icon = {
 
 # =========  Layout  =========== #
 layout = dbc.Col([
-    html.H5('Dashboards'),
     dbc.Row([
 
         # Card de Saldo
@@ -94,7 +93,7 @@ layout = dbc.Col([
                     multi=True
                 ),
 
-                html.Legend("Período de Anpalise", style={"margin-top":"10px"}),
+                html.Legend("Período de Análise", style={"margin-top":"10px"}),
                 dcc.DatePickerRange(
                     month_format='Do MMM, YY',
                     end_date_placeholder_text='Data...',
@@ -105,7 +104,17 @@ layout = dbc.Col([
                     id='date-picker-config',
                     style={'z-index': '100'}),
             ],style={'height':"100%", 'padding':'20px'})
-        ], width=4)
+        ], width=4),
+        
+        dbc.Col(
+            dbc.Card(dcc.Graph(id='graph'),style={'height':'100%', 'padding':'10px'}), width=8
+        )
+    ], style={'margin': '10px'}),
+
+    dbc.Row([
+        dbc.Col(dbc.Card(dcc.Graph(id='Graph2'), style={'padding':'10px'}), width=6),
+        dbc.Col(dbc.Card(dcc.Graph(id='Graph3'), style={'padding':'10px'}), width=3),
+        dbc.Col(dbc.Card(dcc.Graph(id='Graph4'), style={'padding':'10px'}), width=3),
     ])
 ])
 

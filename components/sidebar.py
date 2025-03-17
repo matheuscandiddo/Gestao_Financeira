@@ -63,6 +63,54 @@ layout = dbc.Col([
                                     style={"width": "100%"}
                                 ),
                             ], width=4),
+
+                            dbc.Col([
+                                dbc.Label("Extras"),
+                                dbc.Checklist(
+                                    options=[],
+                                    value=[],
+                                    id='switches-input-receita',
+                                    switch=True
+                                )
+                            ],width=4),
+
+                            dbc.Col([
+                                html.Label('Categoria da receita'),
+                                dbc.Select(id='select_receita', options=[], value=[])
+                            ],width=4)    
+
+                        ],style={'margin-top':'25px'}),
+
+                        dbc.Row([
+                            dbc.Accordion([
+                                dbc.AccordionItem(children=[
+                                    dbc.Row([
+                                        dbc.Col([
+                                            html.Legend("Adicionar categoria", style={'color': 'green'}),
+                                            dbc.Input(type="text", placeholder="Nova categoria...", id="input-add-despesa", value=""),
+                                            html.Br(),
+                                            dbc.Button("Adicionar", className="btn btn-success", id="add-category-despesa", style={"margin-top": "20px"}),
+                                            html.Br(),
+                                            html.Div(id="category-div-add-despesa", style={}),
+
+                                        ], width=6),
+
+                                        dbc.Col([
+                                            html.Legend('Excluir categorias', style={'color':'red'}),
+                                            dbc.Checklist(
+                                                id='checklist-selected-style-receita',
+                                                options=[],
+                                                value=[],
+                                                label_checked_style={'color':'red'},
+                                                input_checked_style={'backgroundColor':'blue','borderColor':'orange'}
+                                            ),
+                                            dbc.Button('Remover', color='warning', id='remove-category-receita', style={'margin-top':'20px'}),
+                                        ], width=6)
+
+                                        
+                                    ])
+                                ])
+                            ])
                         ])
 
                     ])

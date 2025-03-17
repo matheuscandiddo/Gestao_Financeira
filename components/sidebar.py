@@ -38,6 +38,44 @@ layout = dbc.Col([
                     ], width=6)
                 ]),
 
+                #Modal Receita
+                dbc.Modal([
+                    dbc.ModalHeader(dbc.ModalTitle("Adicionar receita")),
+                    dbc.ModalBody([
+                        dbc.Row([
+                            dbc.Col([
+                                dbc.Label('Descrição: '),
+                                dbc.Input(placeholder="Ex.: dividendos da bolsa, herança...", id="txt-receita"),
+                            ], width=6),
+                            dbc.Col([
+                                dbc.Label('Valor: '),
+                                dbc.Input(placeholder="R$ 100", id="valor-receita", value=""),
+                            ], width=6)                    
+                        ]),
+                        
+                        dbc.Row([
+                            dbc.Col([
+                                dbc.Label("Data: "),
+                                dcc.DatePickerSingle(id='date-receitas',
+                                    min_date_allowed=date(2020, 1, 1),
+                                    max_date_allowed=date(2030, 12, 31),
+                                    date=datetime.today(),
+                                    style={"width": "100%"}
+                                ),
+                            ], width=4),
+                        ])
+
+                    ])
+                ], id='modal-novo-receita'),
+
+                #Modal Despesa
+                dbc.Modal([
+                    dbc.ModalHeader(dbc.ModalTitle("Adicionar despesa")),
+                    dbc.ModalBody([
+
+                    ])
+                ], id='modal-novo-despesa'),
+
     # Seção NAV -----------------------------------
 
                 html.Hr(),
@@ -57,3 +95,21 @@ layout = dbc.Col([
 
 # =========  Callbacks  =========== #
 # Pop-up receita
+@app.callback(
+    Output('modal-novo-receita', 'is_open'),
+    Input('open-novo-receita', 'n_clicks'),
+    State('modal-novo-receita', 'is_open')
+)
+def toggle_modal(n1, is_open):
+    if n1:
+        return not is_open
+    
+# Pop-up despesa
+@app.callback(
+    Output('modal-novo-despesa', 'is_open'),
+    Input('open-novo-despesa', 'n_clicks'),
+    State('modal-novo-despesa', 'is_open')
+)
+def toggle_modal(n1, is_open):
+    if n1:
+        return not is_open

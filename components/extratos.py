@@ -25,11 +25,15 @@ layout = dbc.Col([
         dbc.Col([
             dbc.Card(
                 dbc.CardBody([
-                    html.H4("Despesas")
-                ])
+                    html.H4("Despesas"),
+                    html.Legend("R$ 4400", id="valor_despesa_card", style={'font-size':'60px'}),
+                    html.H6("Total de despesas"),
+
+                    
+                ],style={'text-align':'center', 'padding-top':'30px'})
             )
         ])
-    ])
+    ], style={'padding':'10px'})
     
        
     ])

@@ -103,7 +103,7 @@ layout = dbc.Col([
                                             html.Legend('Excluir categorias', style={'color':'red'}),
                                             dbc.Checklist(
                                                 id='checklist-selected-style-receita',
-                                                options=[],
+                                                options=[{"label": i, "value": i} for i in cat_receita],
                                                 value=[],
                                                 label_checked_style={'color':'red'},
                                                 input_checked_style={'backgroundColor':'blue','borderColor':'orange'}
@@ -197,7 +197,7 @@ layout = dbc.Col([
                                             html.Legend('Excluir categorias', style={'color':'red'}),
                                             dbc.Checklist(
                                                 id='checklist-selected-style-despesa',
-                                                options=[],
+                                                options=[{"label": i, "value": i} for i in cat_despesa],
                                                 value=[],
                                                 label_checked_style={'color':'red'},
                                                 input_checked_style={'backgroundColor':'blue','borderColor':'orange'}
@@ -268,10 +268,10 @@ def toggle_modal(n1, is_open):
 
 @app.callback(
     Output('store-receitas','data'),
-    Input('salvar-receita','n_clicks'),
+    Input('salvar_receita','n_clicks'),
     [
         State("txt-receita", "value"),
-        State("valor_receita", "value"),
+        State("valor-receita", "value"),
         State("date-receitas", "date"),
         State("switches-input-receita", "value"),
         State("select_receita", "value"),
@@ -286,7 +286,7 @@ def salve_form_receita(n, descricao, valor, date, switches, categoria, dict_rece
     if n and not (valor == "" or valor == None):
         valor = round(float(valor), 2)
         date = pd.to_datetime(date).date()
-        categoria = categoria[0]
+        categoria = categoria[0] if type(categoria) == list else categoria
         recebido = 1 if 1 in switches else 0
         fixo = 1 if 2 in switches else 0
 
@@ -294,4 +294,35 @@ def salve_form_receita(n, descricao, valor, date, switches, categoria, dict_rece
         df_receitas.to_csv("df_receitas.csv")
 
     data_return = df_receitas.to_dict()
+    return data_return
+
+
+@app.callback(
+    Output('store-despesas','data'),
+    Input('salvar_despesa','n_clicks'),
+    [
+        State("txt-despesa", "value"),
+        State("valor-despesa", "value"),
+        State("date-despesas", "date"),
+        State("switches-input-despesas", "value"),
+        State("select_despesa", "value"),
+        State('store-despesas', 'data')
+    ]
+)
+def salve_form_despesas(n, descricao, valor, date, switches, categoria, dict_despesas):
+    # import pdb
+    # pdb.set_trace()
+    df_despesas = pd.DataFrame(dict_despesas)
+
+    if n and not (valor == "" or valor == None):
+        valor = round(float(valor), 2)
+        date = pd.to_datetime(date).date()
+        categoria = categoria[0] if type(categoria) == list else categoria
+        recebido = 1 if 1 in switches else 0
+        fixo = 1 if 2 in switches else 0
+
+        df_despesas.loc[df_despesas.shape[0]] = [valor, recebido, fixo, date, categoria, descricao]
+        df_despesas.to_csv("df_despesas.csv")
+
+    data_return = df_despesas.to_dict()
     return data_return

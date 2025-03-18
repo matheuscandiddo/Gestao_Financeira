@@ -121,3 +121,26 @@ layout = dbc.Col([
 
 
 # =========  Callbacks  =========== #
+# @app.callback([
+#     Output("dropdown-receita", "options"),
+#     Output("dropdown-receita", "value"),
+#     Output("p-receita-dashboard", "children")],
+#     Input("store-receita", "data"))
+# def populate_dropdownvalues(data):
+#     df = pd.DataFrame(data)
+#     valor = df['Valor'].sum()
+#     val = df.Categoria.unique().tolist()
+#     [{"label": x, "value": x} for x in val]
+#     return ([{"label": x, "value": x} for x in val], val, f"R${valor}")
+
+# @app.callback([
+#     Output("dropdown-despesa", "options"),
+#     Output("dropdown-despesa", "value"),
+#     Output("p-despesa-dashboard", "children")],
+#     Input("store-despesa", "data"))
+# def populate_dropdownvalues(data):
+#     df = pd.DataFrame(data)
+#     valor = df['Valor'].sum()
+#     val = df.Categoria.unique().tolist()
+#     [{"label": x, "value": x} for x in val]
+#     return ([{"label": x, "value": x} for x in val], val, f"R${valor}")

@@ -329,65 +329,65 @@ def salve_form_despesas(n, descricao, valor, date, switches, categoria, dict_des
     return data_return
 
 # Adicionar/Remover Categoria Receita
-# @app.callback(
-#     [
-#     Output("select_receita", "options"),
-#     Output('checklist-selected-style-receita', 'options'),
-#     Output('checklist-selected-style-receita', 'value'),
-#     Output('stored-cat-receitas', 'data')],
+@app.callback(
+    [
+    Output("select_receita", "options"),
+    Output('checklist-selected-style-receita', 'options'),
+    Output('checklist-selected-style-receita', 'value'),
+    Output('stored-cat-receitas', 'data')],
 
-#     [Input("add-category-receita", "n_clicks"),
-#     Input("remove-category-receita", 'n_clicks')],
+    [Input("add-category-receita", "n_clicks"),
+    Input("remove-category-receita", 'n_clicks')],
 
-#     [State("input-add-receita", "value"),
-#     State('checklist-selected-style-receita', 'value'),
-#     State('stored-cat-receitas', 'data')]
-# )
-# def add_cadegory(n, n2, txt, check_delete, data):
-#     cat_receita = list(data["Categoria"].values())
+    [State("input-add-receita", "value"),
+    State('checklist-selected-style-receita', 'value'),
+    State('stored-cat-receitas', 'data')]
+)
+def add_cadegory(n, n2, txt, check_delete, data):
+    cat_receita = list(data["Categoria"].values())
 
-#     if n and not (txt == "" or txt == None):
-#         cat_receita =  cat_receita + [txt] if txt not in cat_receita else cat_receita
+    if n and not (txt == "" or txt == None):
+        cat_receita =  cat_receita + [txt] if txt not in cat_receita else cat_receita
 
-#     if n2:
-#         if len(check_delete) > 0:
-#             cat_receita = [i for i in cat_receita if i not in check_delete]
+    if n2:
+        if len(check_delete) > 0:
+            cat_receita = [i for i in cat_receita if i not in check_delete]
 
-#     opt_receita = [{"label": i, "value": i} for i in cat_receita]
-#     df_cat_receita = pd.DataFrame(cat_receita, columns=['Categoria'])
-#     df_cat_receita.to_csv("df_cat_receita.csv")
-#     data_return = df_cat_receita.to_dict() 
+    opt_receita = [{"label": i, "value": i} for i in cat_receita]
+    df_cat_receita = pd.DataFrame(cat_receita, columns=['Categoria'])
+    df_cat_receita.to_csv("df_cat_receita.csv")
+    data_return = df_cat_receita.to_dict() 
     
-#     return [opt_receita, opt_receita, [], data_return]
+    return [opt_receita, opt_receita, [], data_return]
 
 # Adicionar/Remover Categoria Despesa
-# @app.callback(
-#     [
-#     Output("select_despesa", "options"),
-#     Output('checklist-selected-style-despesa', 'options'),
-#     Output('checklist-selected-style-despesa', 'value'),
-#     Output('stored-cat-despesas', 'data')],
+@app.callback(
+    [
+    Output("select_despesa", "options"),
+    Output('checklist-selected-style-despesa', 'options'),
+    Output('checklist-selected-style-despesa', 'value'),
+    Output('stored-cat-despesas', 'data')],
 
-#     [Input("add-category-despesa", "n_clicks"),
-#     Input("remove-category-despesa", 'n_clicks')],
+    [Input("add-category-despesa", "n_clicks"),
+    Input("remove-category-despesa", 'n_clicks')],
 
-#     [State("input-add-despesa", "value"),
-#     State('checklist-selected-style-despesa', 'value'),
-#     State('stored-cat-despesas', 'data')]
-# )
-# def add_cadegory(n, n2, txt, check_delete, data):
-#     cat_despesa = list(data["Categoria"].values())
+    [State("input-add-despesa", "value"),
+    State('checklist-selected-style-despesa', 'value'),
+    State('stored-cat-despesas', 'data')]
+)
+def add_cadegory(n, n2, txt, check_delete, data):
+    cat_despesa = list(data["Categoria"].values())
 
-#     if n and not (txt == "" or txt == None):
-#         cat_despesa =  cat_despesa + [txt] if txt not in cat_despesa else cat_despesa
+    if n and not (txt == "" or txt == None):
+        cat_despesa =  cat_despesa + [txt] if txt not in cat_despesa else cat_despesa
 
-#     if n2:
-#         if len(check_delete) > 0:
-#             cat_despesa = [i for i in cat_despesa if i not in check_delete]
+    if n2:
+        if len(check_delete) > 0:
+            cat_despesa = [i for i in cat_despesa if i not in check_delete]
 
-#     opt_despesa = [{"label": i, "value": i} for i in cat_despesa]
-#     df_cat_despesa = pd.DataFrame(cat_despesa, columns=['Categoria'])
-#     df_cat_despesa.to_csv("df_cat_despesa.csv")
-#     data_return = df_cat_despesa.to_dict() 
+    opt_despesa = [{"label": i, "value": i} for i in cat_despesa]
+    df_cat_despesa = pd.DataFrame(cat_despesa, columns=['Categoria'])
+    df_cat_despesa.to_csv("df_cat_despesa.csv")
+    data_return = df_cat_despesa.to_dict() 
     
-#     return [opt_despesa, opt_despesa, [], data_return]
+    return [opt_despesa, opt_despesa, [], data_return]

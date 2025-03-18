@@ -32,11 +32,9 @@ layout = dbc.Col([
                     
                 ],style={'text-align':'center', 'padding-top':'30px'})
             )
-        ])
-    ], style={'padding':'10px'})
-    
-       
-    ])
+        ], width=3)
+    ])     
+],style={'padding':'10px'})
 
 # =========  Callbacks  =========== #
 # Tabela

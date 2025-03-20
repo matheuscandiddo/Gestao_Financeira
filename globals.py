@@ -2,10 +2,10 @@ import pandas as pd
 import os
 
 if ("df_despesas.csv" in os.listdir()) and ("df_receitas.csv" in os.listdir()):
-    df_receitas = pd.read_csv("df_receitas.csv", index_col=0, parse_dates=True)
-    df_despesas = pd.read_csv("df_despesas.csv", index_col=0, parse_dates=True)
-    df_receitas["Data"] = pd.to_datetime(df_receitas["Data"])
-    df_despesas["Data"] = pd.to_datetime(df_despesas["Data"])
+    df_receitas = pd.read_csv("df_receitas.csv", index_col=0, dtype={"Data": str})
+    df_despesas = pd.read_csv("df_despesas.csv", index_col=0, dtype={"Data": str})
+    df_receitas["Data"] = pd.to_datetime(df_receitas["Data"], format="%Y-%m-%d", errors="coerce")
+    df_despesas["Data"] = pd.to_datetime(df_despesas["Data"], format="%Y-%m-%d", errors="coerce")
     df_receitas["Data"] = df_receitas["Data"].apply(lambda x: x.date())
     df_despesas["Data"] = df_despesas["Data"].apply(lambda x: x.date())
 else:
@@ -17,8 +17,8 @@ else:
         'Descrição':[],}
     df_receitas = pd.DataFrame(data_structure)
     df_despesas = pd.DataFrame(data_structure)
-    df_despesas.to_csv("df_despesas.csv")
-    df_receitas.to_csv("df_receitas.csv")
+    df_despesas.to_csv("df_despesas.csv", index=False)
+    df_receitas.to_csv("df_receitas.csv", index=False)
 
 if ("df_cat_receita.csv" in os.listdir()) and ("df_cat_despesa.csv" in os.listdir()):
     df_cat_receita = pd.read_csv("df_cat_receita.csv", index_col=0)

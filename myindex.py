@@ -42,4 +42,4 @@ def render_page(pathname):
         return extratos.layout
 
 if __name__ == '__main__':
-    app.run_server(port=8051, debug=True)
+    app.run(port=8051, debug=True)

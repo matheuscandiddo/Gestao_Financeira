@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 import calendar
 from globals import *
 from app import app
+import pdb
 
 card_icon = {
     "color":"white",
@@ -127,11 +128,13 @@ layout = dbc.Col([
     Output("p-receita-dashboard", "children")],
     Input("store-receitas", "data"))
 def populate_dropdownvalues(data):
+    import pdb
+
     df = pd.DataFrame(data)
     valor = df['Valor'].sum()
     val = df.Categoria.unique().tolist()
-
-    return [([{"label": x, "value": x} for x in df.Categoria.unique()]), val, f"R$ {valor}"]
+    
+    return [([{"label": x, "value": x} for x in val]), val, f"R$ {valor}"]
 
 # Dropdown Despesa
 @app.callback([Output("dropdown-despesa", "options"),
@@ -142,8 +145,8 @@ def populate_dropdownvalues(data):
     df = pd.DataFrame(data)
     valor = df['Valor'].sum()
     val = df.Categoria.unique().tolist()
-
-    return [([{"label": x, "value": x} for x in df.Categoria.unique()]), val, f"R$ {valor}"]
+    
+    return [([{"label": x, "value": x} for x in val]), val, f"R$ {valor}"]
 
 # VALOR - saldo Criar filtro por data
 @app.callback(
@@ -159,16 +162,18 @@ def saldo_total(despesas, receitas):
     return f"R$ {valor}"
 
 # Figure 1
-'''
+
 @app.callback(
-    Output('graph1', 'figure'),
+    Output('graph', 'figure'),
     [Input('store-despesas', 'data'),
     Input('store-receitas', 'data'),
     Input("dropdown-despesa", "value"),
     Input("dropdown-receita", "value"),]
 )
 def update_output(data_despesa, data_receita, despesa, receita):
-    df_despesas = pd.DataFrame(data_despesa).set_index("Data")[["Valor"]]
+    
+    df_despesas = pd.DataFrame(data_despesa).set_index("Data")[["Valor"]] 
+
     df_ds = df_despesas.groupby("Data").sum().rename(columns={"Valor": "Despesa"})
 
     df_receitas = pd.DataFrame(data_receita).set_index("Data")[["Valor"]]
@@ -181,5 +186,4 @@ def update_output(data_despesa, data_receita, despesa, receita):
     fig = go.Figure()
     fig.add_trace(go.Scatter(name="Fluxo de Caixa", x=df_acum.index, y=df_acum["Acum"], mode="lines"))
     
-    return fig'
-'''
+    return fig

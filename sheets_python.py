@@ -22,6 +22,11 @@ client = gspread.authorize(creds)
 print(client)
 
 planilha_completa = client.open(
-    tittle = "receitas_csv",
-    folder_id = "1IZfB_UVxbCasWUTLP9u6GO1QGFnF7iAi"
+    title = "df_receitas",
+    folder_id = "1IZfB_UVxbCasWUTLP9u6GO1QGFnF7iAi",
 )
+
+planilha = planilha_completa.get_worksheet(0)
+
+dados = planilha.get_all_records()
+print(pd.DataFrame(dados))

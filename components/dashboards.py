@@ -149,6 +149,7 @@ def populate_dropdownvalues(data):
     return [([{"label": x, "value": x} for x in val]), val, f"R$ {valor}"]
 
 # VALOR - saldo Criar filtro por data
+
 @app.callback(
     Output("p-saldo-dashboard", "children"),
     [Input("store-despesas", "data"),
@@ -163,27 +164,27 @@ def saldo_total(despesas, receitas):
 
 # Figure 1
 
-@app.callback(
-    Output('graph', 'figure'),
-    [Input('store-despesas', 'data'),
-    Input('store-receitas', 'data'),
-    Input("dropdown-despesa", "value"),
-    Input("dropdown-receita", "value"),]
-)
-def update_output(data_despesa, data_receita, despesa, receita):
+# @app.callback(
+#     Output('graph', 'figure'),
+#     [Input('store-despesas', 'data'),
+#     Input('store-receitas', 'data'),
+#     Input("dropdown-despesa", "value"),
+#     Input("dropdown-receita", "value"),]
+# )
+# def update_output(data_despesa, data_receita, despesa, receita):
     
-    df_despesas = pd.DataFrame(data_despesa).set_index("Data")[["Valor"]] 
+#     df_despesas = pd.DataFrame(data_despesa).set_index("Data")[["Valor"]] 
 
-    df_ds = df_despesas.groupby("Data").sum().rename(columns={"Valor": "Despesa"})
+#     df_ds = df_despesas.groupby("Data").sum().rename(columns={"Valor": "Despesa"})
 
-    df_receitas = pd.DataFrame(data_receita).set_index("Data")[["Valor"]]
-    df_rc = df_receitas.groupby("Data").sum().rename(columns={"Valor": "Receita"})
+#     df_receitas = pd.DataFrame(data_receita).set_index("Data")[["Valor"]]
+#     df_rc = df_receitas.groupby("Data").sum().rename(columns={"Valor": "Receita"})
 
-    df_acum = df_ds.join(df_rc, how='outer').fillna(0)
-    df_acum["Acum"] = df_acum["Receita"] - df_acum["Despesa"]
-    df_acum["Acum"] = df_acum["Acum"].cumsum()
+#     df_acum = df_ds.join(df_rc, how='outer').fillna(0)
+#     df_acum["Acum"] = df_acum["Receita"] - df_acum["Despesa"]
+#     df_acum["Acum"] = df_acum["Acum"].cumsum()
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(name="Fluxo de Caixa", x=df_acum.index, y=df_acum["Acum"], mode="lines"))
+#     fig = go.Figure()
+#     fig.add_trace(go.Scatter(name="Fluxo de Caixa", x=df_acum.index, y=df_acum["Acum"], mode="lines"))
     
-    return fig
+#     return fig

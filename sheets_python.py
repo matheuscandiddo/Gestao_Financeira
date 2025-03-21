@@ -5,7 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 # Credenciais de conta --> Com partilhar a pasta e o arquivo no drive manualmente, passar o id da pasta
 
-filename = "projeto-dashboards-financas-d361a0e57bf7.json"
+filename = ""
 
 scopes = [
     "https://spreadsheets.google.com/feeds",

@@ -1,0 +1,42 @@
+import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+
+
+filename = ""
+
+scopes = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive",
+]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name(
+    filename=filename,
+    scopes=scopes
+
+)
+
+def login():
+    creds = ServiceAccountCredentials.from_json_keyfile_name(
+    filename=filename,
+    scopes=scopes)
+    gc = gspread.authorize(creds)
+    return gc
+
+def df_sheets(aba_index):
+    gc = login()
+    main_worksheet = gc.open("dataset_tiago")
+    aba = main_worksheet.get_worksheet(aba_index)
+    dados = aba.get_all_records()
+    df = pd.DataFrame(dados)
+    return df
+
+def salvar_dados(df, aba):
+    gc = login()
+    main_worksheet_up = gc.open("dataset_tiago")
+    sheet = main_worksheet_up.get_worksheet(aba)
+    sheet.update([df.columns.values.tolist()] + df.values.tolist())
+
+df_receitas = df_sheets(0)
+df_despesas = df_sheets(1)
